@@ -10,5 +10,12 @@ import java.util.Optional;
 public interface MovieRepository extends JpaRepository<Movie, Long> {
     Movie update(Movie movie);
 
-    Optional<Object> deleteByIndex(int index);
+   public Optional<Movie> deleteByIndex(int index){
+       if (isValidIndex(index)) {
+           return Optional.of(movies.remove(index));
+       }
+       return Optional.empty();
+   }
+
+
 }
