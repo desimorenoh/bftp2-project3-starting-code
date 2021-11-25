@@ -3,10 +3,7 @@ package net.filmcity.app.controllers;
 import net.filmcity.app.domain.Movie;
 import net.filmcity.app.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,6 +11,7 @@ import java.util.List;
 public class MoviesController {
 
     private final MovieRepository movieRepository;
+    private Object MovieNotFoundException;
 
     @Autowired
     MoviesController(MovieRepository movieRepository){
@@ -30,6 +28,20 @@ public class MoviesController {
         movieRepository.save(movie);
         return movie;
     }
+
+    @DeleteMapping("/movies{index}")
+    public Movie deleteCoderByIndex(@PathVariable int index) {
+        return MovieRepository.deleteByIndex(index).orElseThrow(MovieNotFoundException::new);
+    }
+
+    @PutMapping("/movies")
+    public Movie updateCoderByName(@RequestBody Movie movie) {
+        return MovieRepository.update(movie);
+    }
+
+}
+
+
 
 
 
