@@ -13,6 +13,7 @@ public class Movie {
     private String coverImage;
     private String director;
     private int year;
+    @Lob
     private String synopsis;
 
     public Movie() { }
