@@ -17,12 +17,12 @@ public class Movie {
     private int rating;
     @Lob
     private String synopsis;
-    private String isRenting;
+
 
     public Movie() {
     }
 
-    public Movie(String title, String coverImage, String director, int year, String genre, int rating, String synopsis, String isRenting) {
+    public Movie(String title, String coverImage, String director, int year, String genre, int rating, String synopsis) {
         this.title = title;
         this.coverImage = coverImage;
         this.director = director;
@@ -30,7 +30,7 @@ public class Movie {
         this.genre = genre;
         this.rating = rating;
         this.synopsis = synopsis;
-        this.isRenting = isRenting;
+
 
     }
 
@@ -79,21 +79,5 @@ public class Movie {
         return synopsis;
     }
 
-    public static void main(String args[]) {
-        boolean isRenting = true;
-        if (isRenting) {
-            Movie.notAvailable();
-        }
-    }
 
-    private static void notAvailable() {
-    }
-
-    public String getIsRenting() {
-        return isRenting;
-    }
-
-    public void setIsRenting(String isRenting) {
-        this.isRenting = isRenting;
-    }
 }
