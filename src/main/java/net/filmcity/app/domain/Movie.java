@@ -14,19 +14,23 @@ public class Movie {
     private String director;
     private int year;
     private String genre;
+    private int rating;
+
 
     @Lob
     private String synopsis;
 
     public Movie() { }
 
-    public Movie(String title, String coverImage, String director, int year, String genre, String synopsis) {
+    public Movie(String title, String coverImage, String director, int year, String genre, int rating, String synopsis) {
         this.title = title;
         this.coverImage = coverImage;
         this.director = director;
         this.year = year;
         this.genre = genre;
+        this.rating = rating;
         this.synopsis = synopsis;
+
     }
 
     public Long getId() {
@@ -53,9 +57,29 @@ public class Movie {
         return year;
     }
 
-    public String getGenre()  { return genre; }
+
+
+
+
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
 
     public String getSynopsis() {
         return synopsis;
     }
+
 }

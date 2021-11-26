@@ -47,12 +47,14 @@ class IntegrationTests {
                 .andExpect(jsonPath("$[0].director", equalTo("Steven Spielberg")))
                 .andExpect(jsonPath("$[0].year", equalTo(1993)))
                 .andExpect(jsonPath("$[0].genre", equalTo("Science Fiction")))
+                .andExpect(jsonPath("$[0].rating", equalTo(9/10)))
                 .andExpect(jsonPath("$[0].synopsis", equalTo("A wealthy entrepreneur secretly creates a theme park featuring living dinosaurs drawn from prehistoric DNA.")))
                 .andExpect(jsonPath("$[1].title", equalTo("Ratatouille")))
                 .andExpect(jsonPath("$[1].coverImage", equalTo("https://www.themoviedb.org/t/p/w600_and_h900_bestv2/npHNjldbeTHdKKw28bJKs7lzqzj.jpg")))
                 .andExpect(jsonPath("$[1].director", equalTo("Brad Bird")))
                 .andExpect(jsonPath("$[1].year", equalTo(2007)))
                 .andExpect(jsonPath("$[1].genre", equalTo("Fantasy")))
+                .andExpect(jsonPath("$[1].rating", equalTo(7/10)))
                 .andExpect(jsonPath("$[1].synopsis", equalTo("Remy, a resident of Paris, appreciates good food and has quite a sophisticated palate. He would love to become a chef so he can create and enjoy culinary masterpieces to his heart's delight. The only problem is, Remy is a rat.")))
                 .andDo(print());
     }
@@ -64,12 +66,14 @@ class IntegrationTests {
                         "Steven Spielberg",
                         1993,
                         "Science Fiction",
+                        9/10,
                         "A wealthy entrepreneur secretly creates a theme park featuring living dinosaurs drawn from prehistoric DNA."),
                 new Movie("Ratatouille",
                         "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/npHNjldbeTHdKKw28bJKs7lzqzj.jpg",
                         "Brad Bird",
                         2007,
                         "Fantasy",
+                        7/10,
                         "Remy, a resident of Paris, appreciates good food and has quite a sophisticated palate. He would love to become a chef so he can create and enjoy culinary masterpieces to his heart's delight. The only problem is, Remy is a rat.")
         );
 
