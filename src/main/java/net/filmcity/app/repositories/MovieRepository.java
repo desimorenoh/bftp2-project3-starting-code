@@ -7,15 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface MovieRepository extends JpaRepository<Movie, Long> {
-    Movie update(Movie movie);
-
-   public Optional<Movie> deleteByIndex(int index){
-       if (isValidIndex(index)) {
-           return Optional.of(movies.remove(index));
-       }
-       return Optional.empty();
-   }
+public interface MovieRepository extends JpaRepository<Movie, Long> {}
 
 
-}
+

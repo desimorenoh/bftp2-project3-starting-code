@@ -6,15 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 @RestController
 public class MoviesController {
 
-    private final MovieRepository movieRepository;
-    private Object MovieNotFoundException;
+    private MovieRepository movieRepository;
 
     @Autowired
-    MoviesController(MovieRepository movieRepository){
+    public MoviesController(MovieRepository movieRepository){
         this.movieRepository = movieRepository;
     }
 
@@ -29,14 +29,18 @@ public class MoviesController {
         return movie;
     }
 
-    @DeleteMapping("/movies{index}")
-    public Movie deleteCoderByIndex(@PathVariable int index) {
-        return MovieRepository.deleteByIndex(index).orElseThrow(MovieNotFoundException::new);
+    @DeleteMapping("/movies/{id}")
+    public Movie deleteMovieById(@PathVariable Long id) {
+       Movie movie = movieRepository.findById(id).orElseThrow(MovieNotFoundException::new);
+        movieRepository.deleteById(id);
+        return movie;
     }
+
 
     @PutMapping("/movies")
-    public Movie updateCoderByName(@RequestBody Movie movie) {
-        return MovieRepository.update(movie);
+    public Movie updateMovieById(@RequestBody Movie movie) {
+        movieRepository.findById(movie.getId()).orElseThrow(MovieNotFoundException::new);
+        return movieRepository.save(movie);
     }
 
 }
@@ -49,4 +53,3 @@ public class MoviesController {
 
 
 
-}
