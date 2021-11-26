@@ -46,7 +46,7 @@ class IntegrationTests {
                 .andExpect(jsonPath("$[0].coverImage", equalTo("https://www.themoviedb.org/t/p/w600_and_h900_bestv2/oU7Oq2kFAAlGqbU4VoAE36g4hoI.jpg")))
                 .andExpect(jsonPath("$[0].director", equalTo("Steven Spielberg")))
                 .andExpect(jsonPath("$[0].year", equalTo(1993)))
-                .andExpect(jsonPath("$[1].genre", equalTo("Science Fiction")))
+                .andExpect(jsonPath("$[0].genre", equalTo("Science Fiction")))
                 .andExpect(jsonPath("$[0].synopsis", equalTo("A wealthy entrepreneur secretly creates a theme park featuring living dinosaurs drawn from prehistoric DNA.")))
                 .andExpect(jsonPath("$[1].title", equalTo("Ratatouille")))
                 .andExpect(jsonPath("$[1].coverImage", equalTo("https://www.themoviedb.org/t/p/w600_and_h900_bestv2/npHNjldbeTHdKKw28bJKs7lzqzj.jpg")))
