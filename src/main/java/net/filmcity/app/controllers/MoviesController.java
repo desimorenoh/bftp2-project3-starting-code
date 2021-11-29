@@ -23,6 +23,12 @@ public class MoviesController {
         return movieRepository.findAll();
     }
 
+    @GetMapping("/movies/{id}")
+    public Movie findMovie(@PathVariable Long id) {
+        Movie movie = movieRepository.findById(id).orElseThrow(MovieNotFoundException::new);
+        return movie;
+    }
+
     @PostMapping("/movies")
     public Movie addMovie (@RequestBody Movie movie) {
         movieRepository.save(movie);
