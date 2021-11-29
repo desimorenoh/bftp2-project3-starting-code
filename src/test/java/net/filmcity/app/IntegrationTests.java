@@ -176,4 +176,17 @@ class IntegrationTests {
     }
 
 
+    @Test
+    void returnsAnErrorWhenTryingToModifyAMovieThatDoesNotExist() throws Exception {
+        addSampleMovies();
+
+        mockMvc.perform(put("/movies")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"id\": \"" + -1 + "\", \"title\": \"Jurassic\", \"coverImage\": \"https://www.thesmoviedb.org/t/p/w600_and_h900_bestv2/oU7Oq2kFAAlGqbU4VoAE36g4hoI.jpg\", \"director\": \"Steven Moreno\", \"year\": \"1992\", \"genre\": \"Science\", \"rating\": \"8\", \"synopsis\": \"A unhealthy entrepreneur secretly creates a theme park featuring living dinosaurs drawn from prehistoric DNA.\" }")
+        ).andExpect(status().isNotFound());
+    }
+
+
+
+
 }
