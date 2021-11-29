@@ -42,7 +42,6 @@ class IntegrationTests {
 
         final ResultActions resultActions = mockMvc.perform(get("/movies"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[*]", hasSize(2)))
                 .andExpect(jsonPath("$[0].title", equalTo("Jurassic Park")))
                 .andExpect(jsonPath("$[0].coverImage", equalTo("https://www.themoviedb.org/t/p/w600_and_h900_bestv2/oU7Oq2kFAAlGqbU4VoAE36g4hoI.jpg")))
                 .andExpect(jsonPath("$[0].director", equalTo("Steven Spielberg")))
