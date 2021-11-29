@@ -7,15 +7,18 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.List;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -42,6 +45,7 @@ class IntegrationTests {
 
         final ResultActions resultActions = mockMvc.perform(get("/movies"))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$[*]", hasSize(2)))
                 .andExpect(jsonPath("$[0].title", equalTo("Jurassic Park")))
                 .andExpect(jsonPath("$[0].coverImage", equalTo("https://www.themoviedb.org/t/p/w600_and_h900_bestv2/oU7Oq2kFAAlGqbU4VoAE36g4hoI.jpg")))
                 .andExpect(jsonPath("$[0].director", equalTo("Steven Spielberg")))
@@ -56,7 +60,6 @@ class IntegrationTests {
                 .andExpect(jsonPath("$[1].genre", equalTo("Fantasy")))
                 .andExpect(jsonPath("$[1].rating", equalTo(7)))
                 .andExpect(jsonPath("$[1].synopsis", equalTo("Remy, a resident of Paris, appreciates good food and has quite a sophisticated palate. He would love to become a chef so he can create and enjoy culinary masterpieces to his heart's delight. The only problem is, Remy is a rat.")))
-
                 .andDo(print());
     }
 
@@ -69,7 +72,7 @@ class IntegrationTests {
                         "Science Fiction",
                         9,
                         "A wealthy entrepreneur secretly creates a theme park featuring living dinosaurs drawn from prehistoric DNA."
-                        ),
+                ),
                 new Movie("Ratatouille",
                         "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/npHNjldbeTHdKKw28bJKs7lzqzj.jpg",
                         "Brad Bird",
@@ -77,10 +80,47 @@ class IntegrationTests {
                         "Fantasy",
                         7,
                         "Remy, a resident of Paris, appreciates good food and has quite a sophisticated palate. He would love to become a chef so he can create and enjoy culinary masterpieces to his heart's delight. The only problem is, Remy is a rat."
-                        )
+                )
         );
 
         movieRepository.saveAll(movies);
+    }
+
+
+   @Test
+  void allowsToCreateANewMovie() throws Exception {
+          mockMvc.perform(post("/movies")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"title\": \"Jurassic Park\", \"coverImage\": \"https://www.themoviedb.org/t/p/w600_and_h900_bestv2/oU7Oq2kFAAlGqbU4VoAE36g4hoI.jpg\", \"director\": \"Steven Spielberg\", \"year\": \"1993\", \"genre\": \"Science Fiction\", \"rating\": \"9\", \"synopsis\": \"A wealthy entrepreneur secretly creates a theme park featuring living dinosaurs drawn from prehistoric DNA.\"}")
+        ).andExpect(status().isOk());
+
+        List<Movie> movies = movieRepository.findAll();
+        assertThat(movies, contains(allOf(
+                hasProperty("title", is("Jurassic Park")),
+                hasProperty("coverImage", is("https://www.themoviedb.org/t/p/w600_and_h900_bestv2/oU7Oq2kFAAlGqbU4VoAE36g4hoI.jpg")),
+                hasProperty("director", is("Steven Spielberg")),
+                hasProperty("year", is(1993)),
+                hasProperty("genre", is("Science Fiction")),
+                hasProperty("rating", is(9)),
+                hasProperty("synopsis", is("A wealthy entrepreneur secretly creates a theme park featuring living dinosaurs drawn from prehistoric DNA."))
+        )));
+    }
+
+    @Test
+    void allowsToFindAMovieById() throws Exception {
+
+        Movie movie = movieRepository.save(new Movie("Jurassic Park", "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/oU7Oq2kFAAlGqbU4VoAE36g4hoI.jpg", "Steven Spielberg", 1993, "Science Fiction", 9, "A wealthy entrepreneur secretly creates a theme park featuring living dinosaurs drawn from prehistoric DNA."));
+
+        mockMvc.perform(get("/movies/" + movie.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title", equalTo("Jurassic Park")))
+                .andExpect(jsonPath("$.coverImage", equalTo("https://www.themoviedb.org/t/p/w600_and_h900_bestv2/oU7Oq2kFAAlGqbU4VoAE36g4hoI.jpg")))
+                .andExpect(jsonPath("$.director", equalTo("Steven Spielberg")))
+                .andExpect(jsonPath("$.year", equalTo(1993)))
+                .andExpect(jsonPath("$.genre", equalTo("Science Fiction")))
+                .andExpect(jsonPath("$.rating", equalTo(9)))
+                .andExpect(jsonPath("$.synopsis", equalTo("A wealthy entrepreneur secretly creates a theme park featuring living dinosaurs drawn from prehistoric DNA.")));
+
     }
 
 }
