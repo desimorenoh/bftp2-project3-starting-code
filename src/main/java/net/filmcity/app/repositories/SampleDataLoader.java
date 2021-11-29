@@ -77,6 +77,14 @@ public class SampleDataLoader {
                             "Drama",
                             9,
                             "On the Basis of Sex is inspired by the true story of a young Ruth Bader Ginsburg – then a struggling attorney and new mother – who faces adversity and numerous obstacles in her fight for equal rights throughout her career."
+                            ),
+                    new Movie("La vita è bella",
+                            "https://m.media-amazon.com/images/I/51tWTZJrHYL._SY445_.jpg",
+                            "Roberto Benigni",
+                            1997,
+                            "Drama",
+                            10,
+                            "Benigni interpreta a Guido Orefice, un judío italiano dueño de una librería, que debe emplear su fértil imaginación para proteger a su pequeño hijo de los horrores de un campo de concentración nazi."
                             )
                     // Añadir aqui todas las pelis del catálogo!!
             );
