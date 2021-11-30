@@ -179,7 +179,7 @@ class IntegrationTests {
 
     @Test
     void returnsAnErrorWhenTryingToModifyAMovieThatDoesNotExist() throws Exception {
-        addSampleMovies(); mo
+        addSampleMovies();
 
         mockMvc.perform(put("/movies")
                 .contentType(MediaType.APPLICATION_JSON)
