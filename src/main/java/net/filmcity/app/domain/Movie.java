@@ -15,6 +15,7 @@ public class Movie {
     private int year;
     private String genre;
     private int rating;
+
     @Lob
     private String synopsis;
 
