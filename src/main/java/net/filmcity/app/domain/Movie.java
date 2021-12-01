@@ -59,7 +59,6 @@ public class Movie {
         return year;
     }
 
-
     public String getGenre() {
         return genre;
     }

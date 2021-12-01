@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 @RestController
 public class MoviesController {
 
     private MovieRepository movieRepository;
+    private String id;
 
     @Autowired
     public MoviesController(MovieRepository movieRepository){
@@ -49,7 +49,18 @@ public class MoviesController {
         return movieRepository.save(movie);
     }
 
-}
+    @PutMapping("/movies/{id}/book?customerName={name}")
+    public Movie allowsToModifyAMovieWhenIsBooked(@RequestBody Movie movie, @PathVariable Long id, @RequestParam String customerName, @PathVariable String name) {
+
+        movieRepository.findById(movie.getId()).orElseThrow(MovieNotFoundException::new);
+        return movieRepository.save(movie);
+    }
+
+
+    }
+
+
+
 
 
 
