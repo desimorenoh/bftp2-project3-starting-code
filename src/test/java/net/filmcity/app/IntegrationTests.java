@@ -187,21 +187,4 @@ class IntegrationTests {
         ).andExpect(status().isNotFound());
     }
 
-    @Test
-    void allowsToModifyAMovieWhenIsBooked() throws Exception {
-
-        Movie movie = movieRepository.save(new Movie("Jurassic Park", "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/oU7Oq2kFAAlGqbU4VoAE36g4hoI.jpg", "Steven Spielberg", 1993, "Science Fiction", 9, "A wealthy entrepreneur secretly creates a theme park featuring living dinosaurs drawn from prehistoric DNA."));
-
-        mockMvc.perform(put("/movies/{id}/book?customerName={name}")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content("{\"id\": \"" + movie.getId() + "\", \"title\": \"Jurassic Park\", \"coverImage\": \"https://www.themoviedb.org/t/p/w600_and_h900_bestv2/oU7Oq2kFAAlGqbU4VoAE36g4hoI.jpg\", \"director\": \"Steven Spielberg\", \"year\": \"1993\", \"genre\": \"Science Fiction\", \"rating\": \"9\", \"synopsis\": \"A wealthy entrepreneur secretly creates a theme park featuring living dinosaurs drawn from prehistoric DNA.\": booked\": true, \"customerName\": {name} }")
-        ).andExpect(status().isOk());
-
-
-
-
-
-
-}
-
 }

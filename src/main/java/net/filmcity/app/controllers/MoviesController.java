@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class MoviesController {
 
     private MovieRepository movieRepository;
     private String id;
+    private Long aLong;
 
     @Autowired
     public MoviesController(MovieRepository movieRepository){
@@ -49,15 +51,7 @@ public class MoviesController {
         return movieRepository.save(movie);
     }
 
-    @PutMapping("/movies/{id}/book?customerName={name}")
-    public Movie allowsToModifyAMovieWhenIsBooked(@RequestBody Movie movie, @PathVariable Long id, @RequestParam String customerName, @PathVariable String name) {
-
-        movieRepository.findById(movie.getId()).orElseThrow(MovieNotFoundException::new);
-        return movieRepository.save(movie);
-    }
-
-
-    }
+}
 
 
 
