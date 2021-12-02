@@ -15,15 +15,19 @@ public class Movie {
     private int year;
     private String genre;
     private int rating;
-
+    private String customerName;
     @Lob
     private String synopsis;
+    private String renter;
 
 
     public Movie() {
     }
 
-    public Movie(String title, String coverImage, String director, int year, String genre, int rating, String synopsis) {
+
+
+
+    public Movie(String title, String coverImage, String director, int year, String genre, int rating, String synopsis, String customerName, String renter) {
         this.title = title;
         this.coverImage = coverImage;
         this.director = director;
@@ -31,7 +35,8 @@ public class Movie {
         this.genre = genre;
         this.rating = rating;
         this.synopsis = synopsis;
-
+        this.customerName = customerName;
+        this.renter = renter;
 
     }
 
@@ -79,5 +84,11 @@ public class Movie {
         return synopsis;
     }
 
+    public void setCustomerName(String customerName) { this.customerName = customerName; }
 
+    public String getCustomerName() { return customerName; }
+
+    public void setRenter(String renter) { this.renter = renter; }
+
+    public String getRenter() { return renter; }
 }
