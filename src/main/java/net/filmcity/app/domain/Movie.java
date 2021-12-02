@@ -13,31 +13,21 @@ public class Movie {
     private String coverImage;
     private String director;
     private int year;
-    private String genre;
+    private boolean booked = false;
+    private String renter;
     private int rating;
-    private String customerName;
+
     @Lob
     private String synopsis;
-    private String renter;
 
+    public Movie() { }
 
-    public Movie() {
-    }
-
-
-
-
-    public Movie(String title, String coverImage, String director, int year, String genre, int rating, String synopsis, String customerName, String renter) {
+    public Movie(String title, String coverImage, String director, int year, String synopsis) {
         this.title = title;
         this.coverImage = coverImage;
         this.director = director;
         this.year = year;
-        this.genre = genre;
-        this.rating = rating;
         this.synopsis = synopsis;
-        this.customerName = customerName;
-        this.renter = renter;
-
     }
 
     public Long getId() {
@@ -64,12 +54,25 @@ public class Movie {
         return year;
     }
 
-    public String getGenre() {
-        return genre;
+    public String getSynopsis() {
+        return synopsis;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+
+    public boolean isBooked() {
+        return booked;
+    }
+
+    public void setBooked(boolean booked) {
+        this.booked = booked;
+    }
+
+    public String getRenter() {
+        return renter;
+    }
+
+    public void setRenter(String renter) {
+        this.renter = renter;
     }
 
     public int getRating() {
@@ -79,16 +82,4 @@ public class Movie {
     public void setRating(int rating) {
         this.rating = rating;
     }
-
-    public String getSynopsis() {
-        return synopsis;
-    }
-
-    public String getCustomerName() { return customerName; }
-
-    public void setCustomerName(String customerName) { this.customerName = customerName; }
-
-    public String getRenter() { return renter; }
-
-    public void setRenter(String renter) { this.renter = renter; }
 }
