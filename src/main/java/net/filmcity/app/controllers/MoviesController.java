@@ -14,6 +14,8 @@ public class MoviesController {
     private MovieRepository movieRepository;
     private String id;
     private Long aLong;
+    private String customerName;
+
 
     @Autowired
     public MoviesController(MovieRepository movieRepository){
@@ -51,7 +53,17 @@ public class MoviesController {
         return movieRepository.save(movie);
     }
 
+    @PutMapping("/movies/{id}/book?customerName={name}")
+    public Movie renter(@RequestBody Movie movie, @PathVariable Long id, @RequestParam customerName) {
+        Movie movie = movieRepository.findById(id).orElseThrow(MovieNotFoundException::new);
+        movie.setRenter(true);
+        movie.setRenter(customerName);
+        return movieRepository.save(movie);
+    }
+
+
 }
+
 
 
 
