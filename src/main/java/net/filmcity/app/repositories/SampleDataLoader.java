@@ -33,7 +33,7 @@ public class SampleDataLoader {
                             2007,
                             "Remy, a resident of Paris, appreciates good food and has quite a sophisticated palate. He would love to become a chef so he can create and enjoy culinary masterpieces to his heart's delight. The only problem is, Remy is a rat."),
                     new Movie("Cruella",
-                            "https://pics.filmaffinity.com/Cruella-196211257-large.jpg",
+                            "https://lumiere-a.akamaihd.net/v1/images/image_7ff71125.jpeg?region=0%2C0%2C540%2C810",
                             "Craig Gillespie",
                             2021,
                             "Set in London during the punk rock movement of the 1970s, the film revolves around Estella Miller, an aspiring fashion designer, as she explores the path that will lead her to become a notorious up-and-coming fashion designer known as Cruella de Vil."
@@ -45,7 +45,7 @@ public class SampleDataLoader {
                             "Lindsay Lohan stars as Cady Heron, a 16 year old homeschooled girl who not only makes the mistake of falling for Aaron Samuels (Jonathan Bennett), the ex-boyfriend of queenbee Regina George (Rachel McAdams), but also unintentionally joins The Plastics, led by Regina herself."
                     ),
                     new Movie("Lady Bird",
-                            "https://pics.filmaffinity.com/Lady_Bird-546261513-large.jpg",
+                            "https://play-lh.googleusercontent.com/qh6m6We5w7325ttmO1qcA0Zmtlm2UG4JUux6VSBsjvxG9azJ6KHdBsobAviSMcTOzTULPQ",
                             "Greta Gerwig",
                             2017,
                             "Christine 'Lady Bird' McPherson (Saoirse Ronan) is a senior at a Catholic high school in Sacramento, California in 2002. She longs to attend a prestigious college in 'a city with culture'."
@@ -75,3 +75,4 @@ public class SampleDataLoader {
         }
     }
 }
+
