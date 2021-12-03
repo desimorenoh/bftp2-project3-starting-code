@@ -1,6 +1,7 @@
 package net.filmcity.app.controllers;
 
 import net.filmcity.app.domain.Movie;
+import net.filmcity.app.domain.Rating;
 import net.filmcity.app.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,14 +12,10 @@ import java.util.List;
 @CrossOrigin
 public class MoviesController {
 
-    private MovieRepository movieRepository;
-    private String id;
-    private Long aLong;
-    private String customerName;
-
+    private final MovieRepository movieRepository;
 
     @Autowired
-    public MoviesController(MovieRepository movieRepository){
+    MoviesController(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }
 
@@ -27,57 +24,53 @@ public class MoviesController {
         return movieRepository.findAll();
     }
 
-    @GetMapping("/movies/{id}")
-    public Movie findMovie(@PathVariable Long id) {
-        Movie movie = movieRepository.findById(id).orElseThrow(MovieNotFoundException::new);
-        return movie;
+    @PostMapping("/movies")
+    public Movie createMovie(@RequestBody Movie movie) {
+        return movieRepository.save(movie);
     }
 
-    @PostMapping("/movies")
-    public Movie addMovie (@RequestBody Movie movie) {
-        movieRepository.save(movie);
-        return movie;
+    @PutMapping("/movies")
+    public Movie updateMovie(@RequestBody Movie movie) {
+        return movieRepository.save(movie);
     }
 
     @DeleteMapping("/movies/{id}")
-    public Movie deleteMovieById(@PathVariable Long id) {
-       Movie movie = movieRepository.findById(id).orElseThrow(MovieNotFoundException::new);
+    public void deleteMovie(@PathVariable Long id) {
         movieRepository.deleteById(id);
-        return movie;
     }
+
 
 
     @PutMapping("/movies/{id}/book?renter={name}")
     public Movie renter(@PathVariable Long id, @RequestParam String customerName) {
+
+    @PutMapping("/movies/{id}/book")
+    public Movie bookMovie(@PathVariable Long id, @RequestParam String customerName) {
+
         Movie movie = movieRepository.findById(id).orElseThrow(MovieNotFoundException::new);
         movie.setBooked(true);
         movie.setRenter(customerName);
         return movieRepository.save(movie);
     }
+
     @PutMapping("/movies/{id}/return")
     public Movie renter(@PathVariable Long id) {
+
+
+    @PutMapping("/movies/{id}/return")
+    public Movie bookMovie(@PathVariable Long id) {
+
         Movie movie = movieRepository.findById(id).orElseThrow(MovieNotFoundException::new);
         movie.setBooked(false);
         movie.setRenter(null);
         return movieRepository.save(movie);
     }
 
+    @PutMapping("/movies/{id}/rating")
+    public Movie addRating(@RequestBody Rating rating, @PathVariable Long id) {
+        Movie movie = movieRepository.findById(id).orElseThrow(MovieNotFoundException::new);
+        movie.setRating(rating.getScore());
+        return movieRepository.save(movie);
+    }
 
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 3b3933fae32d881d6211d8031a44db5117449011
+        }
