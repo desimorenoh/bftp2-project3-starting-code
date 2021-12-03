@@ -69,7 +69,7 @@ public class MoviesController {
     @PutMapping("/movies/{id}/rating")
     public Movie addRating(@RequestBody Rating rating, @PathVariable Long id) {
         Movie movie = movieRepository.findById(id).orElseThrow(MovieNotFoundException::new);
-        movie.setRating(rating.getScore());
+        movie.setRating (rating.getScore());
         return movieRepository.save(movie);
     }
 
