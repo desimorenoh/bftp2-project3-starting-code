@@ -68,7 +68,7 @@ public class SampleDataLoader {
                             1997,
                             "Benigni interpreta a Guido Orefice, un judío italiano dueño de una librería, que debe emplear su fértil imaginación para proteger a su pequeño hijo de los horrores de un campo de concentración nazi."
                     )
-                    // Añadir aqui todas las pelis del catálogo!!
+
             );
 
             movieRepository.saveAll(movies);

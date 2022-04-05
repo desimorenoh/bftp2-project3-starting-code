@@ -71,14 +71,6 @@ public class Movie {
         return renter;
     }
 
-    public void setCustomerName(String customerName) { this.customerName = customerName; }
-
-    public String getCustomerName() { return customerName; }
-
-    public void setRenter(String renter) { this.renter = renter; }
-
-    public String getRenter() { return renter; }
-
     public void setRenter(String renter) {
         this.renter = renter;
     }
@@ -90,5 +82,4 @@ public class Movie {
     public void setRating(int rating) {
         this.rating = rating;
     }
-
 }
